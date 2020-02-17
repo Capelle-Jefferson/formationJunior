@@ -1,0 +1,8 @@
+Creation projet
+composer create-project symfony/website-skeleton formationJunior "^4"
+
+php bin/console server:run
+
+php bin\console doctrine:database:create
+
+php bin\console make:entity

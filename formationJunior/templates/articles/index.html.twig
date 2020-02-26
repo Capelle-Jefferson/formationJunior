@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <p></p>
+        {{form_start(articlesByCategorieType)}}
+        {{form_widget(articlesByCategorieType)}}
+        
+        {{form_end(articlesByCategorieType)}}
+    <p></p>
+    <div class="row mb-2">
+	{% for article in articles %}
+
+      <div class="col-md-6">
+        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <h3 class="mb-0">{{ article.titre }}</h3>
+            <div class="mb-1 text-muted"> {{article.date|date("d/m/Y - H:i:s")}} </div>
+            <p class="card-text mb-auto">{{ article.resume }}</p>
+            <a href="/article/{{article.id}}" class="stretched-link">Lire la suite</a>
+          </div>
+        </div>
+      </div>
+
+	{% endfor %}
+    </div>
+{% endblock %}

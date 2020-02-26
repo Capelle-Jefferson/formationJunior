@@ -17,21 +17,25 @@ class NewUserFormType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
+                'label' => "Nom d'utilisateur",
                 'attr' => [
                     'class' => "form-control"
                 ]
             ])
             ->add('mail', EmailType::class, [
+                'label' => "Adresse mail",
                 'attr' => [
                     'class' => "form-control"
                 ]
             ])
             ->add('password', PasswordType::class, [
+                'label' => "Mot de passe",
                 'attr' => [
                     'class' => "form-control"
                 ]
             ])
             ->add('confirm_password', PasswordType::class, [
+                'label' => "Confirmation du mot de passe",
                 'attr' => [
                     'class' => "form-control"
                 ]

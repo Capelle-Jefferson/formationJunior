@@ -3,7 +3,7 @@ security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
         App\Entity\Users:
-            algorithm: auto
+            algorithm: bcrypt
 
         
     providers:
@@ -21,11 +21,17 @@ security:
             security: false
         main:
             pattern: ^/
+
+            provider: app_user_provider
             form_login:
-              provider: fos_userbundle
-              csrf_token_generator: security.csrf.token_manager
+              login_path: users_login
+              check_path: users_login
+              #provider: fos_userbundle
+              #csrf_token_generator: security.csrf.token_manager
               
-            logout: true
+            logout: 
+                path: users_logout
+                target: /
             anonymous: true
 
 

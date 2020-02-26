@@ -78,8 +78,6 @@ class ArticlesController extends AbstractController
             $article = $this->getDoctrine()
                     ->getRepository(Articles::class)
                     ->find($id);
-            
-
             if(!$article){
                 throw $this->createNotFoundException("L'article recherch� n'existe pas");
 			}
@@ -91,6 +89,7 @@ class ArticlesController extends AbstractController
             if($form->isSubmitted() && $form->isValid()){
                 $commentaire->setArticle($article);
                 $commentaire->setDate(new \DateTime("now"));
+                $commentaire->setAuteur($this->getUser());
                 $doctrine = $this->getDoctrine()->getManager();
                 $doctrine->persist($commentaire);
                 $doctrine->flush();

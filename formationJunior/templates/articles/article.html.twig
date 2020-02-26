@@ -15,20 +15,31 @@
         <p> {{ article.contenu|raw }}</p>
     </div>
 
-    <h2>Ajouter un commentaire</h2>
-    {{ form(formCommentaire) }}
     <br>
-    <div class="blog-post">
-        <h3 class="blog-post-title">Commentaires:</h3>
+    <section id="commentaire">
+        <h3 class="blog-post-title">( {{commentaires | length}} ) commentaires:</h3>
         {% for commentaire in commentaires %}
-            <div>
-                <p class="blog-post-meta">{{commentaire.date|date("d/m/Y - H:i:s")}}, publié par {{commentaire.getAuteur().getUsername()}} </p>
-                <p>{{commentaire.message}}<p>
+            <div class="comment">
+                <div class="row">
+                    <div class="col-3">
+                        de {{commentaire.getAuteur().getUsername()}} - (<small>{{commentaire.date|date("d/m/Y - H:i:s")}})</small>
+                    </div>
+                    <div class="col">
+                        {{commentaire.message|raw}}
+                    </div>
+                </div>
             </div>
             <br>
-        {% else %}
-            <p>Il n'y a pas encore de commentaire</p>
+            
         {% endfor %}
-        
-    </div>
+        <br>
+        {% if app.user %}
+        <h2>Ajouter un commentaire</h2>
+        {{ form(formCommentaire) }}
+
+        {% else %}
+            <h2>Vous devez être connecté pour commenter ! </h2>
+            <a href="{{path('users_login')}}" class="btn btn-primary">Connexion</a>
+        {% endif %}
+    </section>
 {% endblock %}

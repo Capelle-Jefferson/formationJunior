@@ -8,13 +8,25 @@
     <table class="table table-striped">
         <thead class="thead-dark"><tr>
             <th scope="col">Nom d'utilisateur</th>
-            <th scope="col">Role</th>
+            <th scope="col">Rôle</th>
+            <th scope="col">Modifier rôle</th>
         </tr></thead>
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.username }}</td>
-                <td>{{ user.roles[0]}}</td>
+                <form action="role_update/{{user.id}}" method="post">
+                    <! Username --> 
+                    <td>{{ user.username }}</td>
+                    <! Roles -->
+                    <td><select name="role" class="custom-select">
+                        <option {%if (user.roles[0] == null) %} selected {% endif %} value="ROLE_USER">Utilisateur</option>
+                        <option {%if (user.roles[0] == "ROLE_ADMIN") %} selected {% endif %} value="ROLE_ADMIN">Administrateur</option>
+                    </select></td>
+                    <! Icon update -->  
+                    <td>
+                        <button class="btn btn-info btn-sm"> Valider la <br> modification </button>
+                    <td>
+                </form>
             <tr>
         {% endfor %}
         </tbody>

@@ -8,6 +8,7 @@
     <table class="table table-striped">
         <thead class="thead-dark"><tr>
             <th scope="col">Nom d'utilisateur</th>
+            <th scope="col">Articles</th>
             <th scope="col">Rôle</th>
             <th scope="col">Modifier rôle</th>
         </tr></thead>
@@ -17,6 +18,7 @@
                 <form action="role_update/{{user.id}}" method="post">
                     <! Username --> 
                     <td>{{ user.username }}</td>
+                    <td>{{ user.articles|length }}</td>
                     <! Roles -->
                     <td><select name="role" class="custom-select">
                         <option {%if (user.roles[0] == null) %} selected {% endif %} value="ROLE_USER">Utilisateur</option>

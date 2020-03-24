@@ -41,5 +41,10 @@
             <h2>Vous devez être connecté pour commenter ! </h2>
             <a href="{{path('users_login')}}" class="btn btn-primary">Connexion</a>
         {% endif %}
+        
+        {% if (user == article.getAuteur) %}
+            <br><br>
+            <a class="btn btn-primary" href="delete/{{article.id}}">Supprimer</a>
+        {% endif %}
     </section>
 {% endblock %}

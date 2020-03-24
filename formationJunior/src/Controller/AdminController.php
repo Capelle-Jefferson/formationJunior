@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Users;
+use App\Repository\UsersRepository;
 
 /**
  * @Route("/admin", name="admin_")
@@ -14,14 +15,10 @@ class AdminController extends AbstractController
     /**
      * @Route("/", name="")
      */
-    public function usersAdministration()
+    public function usersAdministration(UsersRepository $users)
     {
-        $users = $this->getDoctrine()
-                      ->getRepository(Users::class)
-                      ->findBy(array(), array('roles' => 'asc', 'username' => 'asc'));
-
         return $this->render('admin/users.html.twig', [
-            'users' => $users,
+            'users' => $users->findAll(),
         ]);
     }
 
@@ -29,7 +26,6 @@ class AdminController extends AbstractController
      * @Route("/role_update/{id}", name="roleUpdate")
      */
     public function roleUpdate($id){
-
         $user = $this->getDoctrine()
                       ->getRepository(Users::class)
                       ->find($id);

@@ -56,9 +56,7 @@ class ArticlesController extends AbstractController
         $form = $this->createForm(ArticleFormType::class, $article);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){ 
-            $article->setAuteur($this->getDoctrine()
-                                ->getRepository(Users::class)
-                                ->find(1));
+            $article->setAuteur($this->getUser());
             $article->setDate(new \DateTime("now"));
             $doctrine = $this->getDoctrine()->getManager();
             $doctrine->persist($article);
@@ -105,8 +103,15 @@ class ArticlesController extends AbstractController
                           'article' => $article,
                           'commentaires' => $commentaires,
                           'formCommentaire' => $form->createView(),
+                          'user' => $this->getUser()
             ]);
      }
-     
+
+    /**
+     * @Route("/article/delete/{id}", name="delete_article")
+     */
+     public function delete_article($id){
+         // A FAIRE
+     }
 
 }
